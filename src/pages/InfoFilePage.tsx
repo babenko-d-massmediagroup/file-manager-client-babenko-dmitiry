@@ -1,3 +1,11 @@
+import { PlainInfo } from "../components/PlainInfo";
+import { TopNavigationBar } from "../components/TopNavigationBar";
+
 export const InfoFilePage = () => {
-  return <div>INFO PAGE</div>
-}
+  return (
+    <>
+      <TopNavigationBar />
+      <PlainInfo />
+    </>
+  );
+};
