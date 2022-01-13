@@ -1,3 +1,20 @@
-export const UploadDeleteDate = () => {
-  return<div>Delete data</div>
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+
+export function UploadDeleteDate() {
+  return (
+    <Stack component="form" noValidate spacing={3}>
+      <TextField
+        id="date"
+        label="Delete date"
+        type="date"
+        defaultValue="2017-05-24"
+        sx={{ width: 220 }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+    </Stack>
+  );
 }

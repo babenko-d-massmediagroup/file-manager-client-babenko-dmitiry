@@ -1,3 +1,5 @@
+import { TextField } from "@mui/material";
+
 export const UploadComment = () => {
-  return <div>UploadComment</div>
-}
+  return <TextField id="outlined-basic" label="Comment" variant="outlined" />;
+};
