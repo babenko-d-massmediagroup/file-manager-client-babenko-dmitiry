@@ -7,9 +7,13 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 export const UploadDropZone = ({
   uploadFile,
   setUploadFile,
+  comment,
+  deleteDate,
 }: {
   uploadFile: boolean;
   setUploadFile: Function;
+  comment: string;
+  deleteDate: string;
 }) => {
   useEffect(() => {
     if (!uploadFile) {
@@ -24,7 +28,7 @@ export const UploadDropZone = ({
 
         axios({
           method: "post",
-          url: "http://localhost:4000/image/",
+          url: `http://localhost:4000/image?comment=${comment}&deleteDate=${deleteDate}`,
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -50,15 +54,6 @@ export const UploadDropZone = ({
   const [file, upload] = useState<File>();
   const ref = useRef<any>(null);
   return (
-    // <input
-    // ref={ref}
-    // type={'file'}
-    // onChange={e=>{
-    //   if(e.target.files && e.target.files.length){
-    //     upload(e.target.files[0])
-    //   }
-    // }}>
-    // </input>
     <>
       <input
         color="primary"
