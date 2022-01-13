@@ -9,12 +9,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const theme = createTheme();
 
 export const RegisterPage = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -26,12 +27,15 @@ export const RegisterPage = () => {
     }
 
     try {
-      const res = await axios.post(`http://localhost:4000/auth/register`, {
+      const { data } = await axios.post(`http://localhost:4000/auth/register`, {
         username,
         password,
       });
 
-      console.log(res);
+      if (!data.token) {
+      }
+      localStorage.setItem("token", data.token);
+      navigate("/");
     } catch (e) {
       console.error(e);
     }

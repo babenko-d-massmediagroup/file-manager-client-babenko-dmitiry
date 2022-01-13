@@ -8,6 +8,8 @@ import { UploadField } from "./UploadField";
 
 export const UploadFileConainer = () => {
   const [uploadFile, setUploadFile] = useState(false);
+  const [comment, setComment] = useState("");
+  const [deleteDate, setDeleteDate] = useState("");
 
   return (
     <Box
@@ -17,10 +19,15 @@ export const UploadFileConainer = () => {
       alignItems={"center"}
       height={"300px"}
     >
-      <UploadDropZone uploadFile={uploadFile} setUploadFile={setUploadFile} />
+      <UploadDropZone
+        uploadFile={uploadFile}
+        setUploadFile={setUploadFile}
+        comment={comment}
+        deleteDate={deleteDate}
+      />
       {/* <UploadField/> */}
-      <UploadComment />
-      <UploadDeleteDate />
+      <UploadComment setComment={setComment} comment={comment} />
+      <UploadDeleteDate setDeleteDate={setDeleteDate} deleteDate={deleteDate} />
       <UploadButtons uploadFile={uploadFile} setUploadFile={setUploadFile} />
     </Box>
   );

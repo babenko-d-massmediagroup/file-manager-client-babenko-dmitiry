@@ -1,4 +1,5 @@
 import { Box, Button } from "@mui/material";
+import { LoaderButton } from "./LoaderButton";
 
 export const UploadButtons = ({
   uploadFile,
@@ -9,7 +10,7 @@ export const UploadButtons = ({
 }) => {
   return (
     <Box>
-      <Button onClick={() => setUploadFile(true)}>Upload File</Button>
+      <LoaderButton onClick={() => setUploadFile(true)}></LoaderButton>
     </Box>
   );
 };
