@@ -5,6 +5,8 @@ import { HomePage } from "./pages/Home";
 import { InfoFilePage } from "./pages/InfoFilePage";
 import { LoginPage } from "./pages/Login";
 import { RegisterPage } from "./pages/Register";
+import { StatisticPage } from "./pages/Statistic";
+import { TempLinkPage } from "./pages/TempLinkPage";
 import { WatchFile } from "./pages/WatchFile";
 
 export const Router = () => {
@@ -18,6 +20,8 @@ export const Router = () => {
         <Route path="info" element={<InfoFilePage />} />
         <Route path="info/:photoId" element={<FullInfoPage />} />
         <Route path="watch/:photoId" element={<WatchFile />} />
+        <Route path="temp/:token" element={<TempLinkPage />} />
+        <Route path="statistick" element={<StatisticPage />} />
       </Routes>
     </BrowserRouter>
   );
