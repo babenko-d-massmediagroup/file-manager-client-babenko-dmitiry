@@ -18,6 +18,13 @@ export function UploadDeleteDate({
         // defaultValue="2017-05-24"
         value={deleteDate}
         onChange={(e) => {
+          if (
+            Date.parse(new Date(e.target.value).toString()) <
+            Date.parse(new Date().toISOString().slice(0, 10))
+          ) {
+            console.log("invalid date");
+            return;
+          }
           setDeleteDate(e.target.value);
         }}
         sx={{ width: 220 }}

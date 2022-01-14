@@ -13,6 +13,7 @@ export const UploadComment = ({
       label="Comment"
       variant="outlined"
       value={comment}
+      sx={{ width: 220 }}
       onChange={(e) => setComment(e.target.value)}
     />
   );

@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +24,19 @@ export const HomePage = () => {
   return (
     <>
       <TopNavigationBar />
-      <InfoContainer />
-      <UploadFileConainer />
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        marginTop={"100px"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        height={"400px"}
+      >
+        <InfoContainer />
+        <Box>
+          <UploadFileConainer />
+        </Box>
+      </Box>
     </>
   );
 };
