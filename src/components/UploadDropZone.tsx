@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import FormData from "form-data";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 
 export const UploadDropZone = ({
@@ -24,7 +24,6 @@ export const UploadDropZone = ({
       const sendImage = async () => {
         var data = new FormData();
         data.append("file", file);
-        data.append("comment", "Hellow world");
 
         axios({
           method: "post",
@@ -60,7 +59,12 @@ export const UploadDropZone = ({
         accept="image/*"
         type="file"
         onChange={(e) => {
-          if (e.target.files && e.target.files.length) {
+          if (
+            e.target.files &&
+            e.target.files.length &&
+            e.target.files[0].size < 5 * 1024 * 1024 + 1
+          ) {
+            console.log(e.target.files[0]);
             upload(e.target.files[0]);
           }
         }}
@@ -72,6 +76,11 @@ export const UploadDropZone = ({
           <UploadFileIcon />
         </Button>
       </label>
+      {file ? (
+        <Typography variant="h6">Image {file.name} is chosen</Typography>
+      ) : (
+        <Typography variant="h5">Chose image</Typography>
+      )}
     </>
   );
 };

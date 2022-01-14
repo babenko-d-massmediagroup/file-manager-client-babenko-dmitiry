@@ -5,6 +5,7 @@ import { HomePage } from "./pages/Home";
 import { InfoFilePage } from "./pages/InfoFilePage";
 import { LoginPage } from "./pages/Login";
 import { RegisterPage } from "./pages/Register";
+import { WatchFile } from "./pages/WatchFile";
 
 export const Router = () => {
   return (
@@ -16,6 +17,7 @@ export const Router = () => {
         <Route path="home" element={<HomePage />} />
         <Route path="info" element={<InfoFilePage />} />
         <Route path="info/:photoId" element={<FullInfoPage />} />
+        <Route path="watch/:photoId" element={<WatchFile />} />
       </Routes>
     </BrowserRouter>
   );

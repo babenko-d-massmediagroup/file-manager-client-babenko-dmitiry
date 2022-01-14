@@ -9,7 +9,7 @@ import { UploadField } from "./UploadField";
 export const UploadFileConainer = () => {
   const [uploadFile, setUploadFile] = useState(false);
   const [comment, setComment] = useState("");
-  const [deleteDate, setDeleteDate] = useState("");
+  const [deleteDate, setDeleteDate] = useState(new Date().toISOString().slice(0, 10));
 
   return (
     <Box
