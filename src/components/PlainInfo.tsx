@@ -14,19 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useCustomSnackbar from "../errorHandler";
-
-export interface Info {
-  _id: string;
-  length: number;
-  chunkSize: number;
-  uploadDate: Date;
-  filename: string;
-  contentType: string;
-  metadata: {
-    userId: string;
-    fileInfo: string;
-  };
-}
+import { Info } from "../interface";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

@@ -12,6 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useCustomSnackbar from "../errorHandler";
+import { Statistic } from "../interface";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,14 +32,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-interface Statistic {
-  deleteFiles: number;
-  fileCount: number;
-  linkWatchedTimes: number;
-  tempLinkCount: number;
-  usedTemporaryLinks: number;
-}
 
 export const StatisticPage = () => {
   const { error } = useCustomSnackbar();

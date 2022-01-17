@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import { Info } from "./PlainInfo";
+import { Info } from "../interface";
 
 export const PlainInfoOne = ({ item, index }: { item: Info; index: number }) => {
   const navigate = useNavigate();
