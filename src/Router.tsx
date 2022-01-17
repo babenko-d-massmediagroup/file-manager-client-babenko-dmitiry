@@ -1,3 +1,4 @@
+import { SnackbarProvider } from "notistack";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { EnterPage } from "./pages/EnterPage";
 import { FullInfoPage } from "./pages/FullInfo";
@@ -11,18 +12,20 @@ import { WatchFile } from "./pages/WatchFile";
 
 export const Router = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<EnterPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="info" element={<InfoFilePage />} />
-        <Route path="info/:photoId" element={<FullInfoPage />} />
-        <Route path="watch/:photoId" element={<WatchFile />} />
-        <Route path="temp/:token" element={<TempLinkPage />} />
-        <Route path="statistick" element={<StatisticPage />} />
-      </Routes>
-    </BrowserRouter>
+    <SnackbarProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<EnterPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="info" element={<InfoFilePage />} />
+          <Route path="info/:photoId" element={<FullInfoPage />} />
+          <Route path="watch/:photoId" element={<WatchFile />} />
+          <Route path="temp/:token" element={<TempLinkPage />} />
+          <Route path="statistic" element={<StatisticPage />} />
+        </Routes>
+      </BrowserRouter>
+    </SnackbarProvider>
   );
 };

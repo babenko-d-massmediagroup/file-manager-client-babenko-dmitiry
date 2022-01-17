@@ -1,63 +1,56 @@
-import React, { useState, useEffect } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@mui/material/";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import useCustomSnackbar from "../errorHandler";
+
 const theme = createTheme();
 
 export const LoginPage = (props: any) => {
-  const history = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const history = useNavigate();
+  const { error, warning } = useCustomSnackbar();
 
   const login = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     if (!username || !password) {
+      warning("Fill all fields");
       return;
     }
 
     try {
-      const { data } = await axios.post(`http://localhost:4000/auth/login`, {
+      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND}/auth/login`, {
         username,
         password,
       });
 
       if (!data.token) {
-        //set error
+        error("Please, try later");
       }
 
       localStorage.setItem("token", data.token);
       history("/");
     } catch (e: any) {
-      console.error(e.response.data.message, e.response.data.statusCode);
+      if (e.response) {
+        error(e.response.data.message);
+        return;
+      }
+      error(e.message);
     }
   };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,7 +70,7 @@ export const LoginPage = (props: any) => {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

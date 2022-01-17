@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import React, { useState } from "react";
+import axios from "axios";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import useCustomSnackbar from "../errorHandler";
 
 const theme = createTheme();
 
@@ -18,37 +21,31 @@ export const RegisterPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { error, warning } = useCustomSnackbar();
 
   const register = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     if (!username || !password) {
+      warning("Fill all fields");
       return;
     }
 
     try {
-      const { data } = await axios.post(`http://localhost:4000/auth/register`, {
+      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND}/auth/register`, {
         username,
         password,
       });
 
       if (!data.token) {
+        error("Please, try later");
       }
+
       localStorage.setItem("token", data.token);
       navigate("/");
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      error(e.response.data.message);
     }
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
   };
 
   return (
@@ -69,7 +66,7 @@ export const RegisterPage = () => {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { Button, Container } from "@mui/material";
 
 export const UploadField = () => {

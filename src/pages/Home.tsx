@@ -1,26 +1,34 @@
-import { Box } from "@mui/material";
-import axios from "axios";
 import { useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 import { InfoContainer } from "../components/InfoContainer";
+import { StatisticButton } from "../components/StatisticButton";
 import { TopNavigationBar } from "../components/TopNavigationBar";
 import { UploadFileConainer } from "../components/UploadFileContainer";
 
 export const HomePage = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
 
     axios
-      .get(`http://localhost:4000/auth/validateToken`, {
+      .get(`${process.env.REACT_APP_BACKEND}/auth/validateToken`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then(({ data }) => {
+        if (data.status === "invalid") {
+          navigate("/login");
+        }
       })
       .catch((e) => {
         navigate("/login");
       });
   }, []);
+
   return (
     <>
       <TopNavigationBar />
@@ -35,6 +43,9 @@ export const HomePage = () => {
         <InfoContainer />
         <Box>
           <UploadFileConainer />
+        </Box>
+        <Box>
+          <StatisticButton />
         </Box>
       </Box>
     </>
